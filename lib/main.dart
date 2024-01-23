@@ -1,31 +1,28 @@
-import 'package:bases_web/locator.dart';
 import 'package:bases_web/router/router.dart';
-import 'package:bases_web/services/navigation_service.dart';
-import 'package:bases_web/ui/layout/main_layout_page.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  setupLocator();
-  Flurorouter.configerRouters();
-  runApp(const MyApp());
+void main() => runApp(const MyApp());
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    Flurorouter.configureRoutes();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
-      navigatorKey: locator<NavigationService>().navigatorKey,
-      builder: (context, child) {
-        return MainLayoutPage(child: child!);
-      },
-      debugShowCheckedModeBanner: false,
-      title: 'Rutas App',
-      onGenerateRoute: (routeSettings) =>
-          Flurorouter.router.generator(routeSettings),
-      // onGenerateRoute: (settings) => RouteGenerator.generateRoute(settings),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Landing Page',
+        onGenerateRoute: Flurorouter.router.generator,
+        initialRoute: '/home');
   }
 }

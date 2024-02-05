@@ -1,5 +1,7 @@
+import 'package:bases_web/providers/page_provider.dart';
 import 'package:bases_web/ui/shared/custom_app_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../views/views.dart';
 
@@ -23,12 +25,16 @@ class _HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(scrollDirection: Axis.vertical, children: const [
-      HomeView(),
-      AboutView(),
-      PricingView(),
-      ContactView(),
-      LocationView()
-    ]);
+    final pageProvider = Provider.of<PageProvider>(context, listen: false);
+    return PageView(
+        controller: pageProvider.scrollController,
+        scrollDirection: Axis.vertical,
+        children: const [
+          HomeView(),
+          AboutView(),
+          PricingView(),
+          ContactView(),
+          LocationView()
+        ]);
   }
 }
